@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de Materiais do Marketing</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        
+        /* Paleta de Cores com Identidade Visual Organnact */
+        :root {
+            --primary-color: #fbae3d; /* Amarelo Organnact */
+            --primary-hover-color: #e59921; /* Amarelo Organnact mais escuro */
+            --background-color: #f8fafc; /* slate-50 */
+            --card-background: #ffffff;
+            --text-color: #1e293b; /* slate-800 */
+            --light-text-color: #64748b; /* slate-500 */
+            --border-color: #e2e8f0; /* slate-200 */
+            --header-bg: #144371; /* Azul Organnact */
+            --error-color: #ef4444; /* red-500 */
+            --success-color: #22c55e; /* green-500 */
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background-color: var(--background-color); 
+            color: var(--text-color); 
+            margin: 0; 
+        }
+        .hidden { display: none !important; }
+
+        /* --- Tela de Login Renovada --- */
+        #login-page { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; 
+            display: flex; align-items: center; justify-content: center; 
+            background-image: url('img/bg.webp'); /* Fundo adicionado */
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.3s ease-in-out; 
+        }
+        .login-container { 
+            background-color: var(--card-background); 
+            padding: 40px; 
+            border-radius: 16px; 
+            box-shadow: var(--shadow-lg); 
+            width: 100%; max-width: 400px; text-align: center; box-sizing: border-box; 
+        }
+        .login-logo img { 
+            height: 45px; 
+            margin-bottom: 25px; 
+            display: block; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .login-container h1 { color: var(--text-color); margin-bottom: 25px; font-size: 1.8em; font-weight: 700; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--text-color); }
+        .input-group input { 
+            width: 100%; padding: 12px 15px; border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+            font-size: 1em; box-sizing: border-box; 
+            transition: border-color 0.2s, box-shadow 0.2s; 
+        }
+        .input-group input:focus { 
+            outline: none; 
+            border-color: var(--primary-color); 
+            box-shadow: 0 0 0 3px rgba(251, 174, 61, 0.3); 
+        }
+        #login-button, #reset-button { 
+            width: 100%; padding: 15px; border: none; border-radius: 8px; 
+            background-color: var(--primary-color); 
+            color: white; font-size: 1.1em; font-weight: 600; 
+            cursor: pointer; transition: background-color 0.2s; 
+        }
+        #login-button:hover, #reset-button:hover { background-color: var(--primary-hover-color); }
+        #login-message, #reset-message { margin-top: 15px; font-weight: 500; min-height: 20px; }
+        #login-message { color: var(--error-color); } 
+        #reset-message.success { color: var(--success-color); } 
+        #reset-message.error { color: var(--error-color); }
+        .form-footer a { color: var(--header-bg); text-decoration: none; font-weight: 500; cursor: pointer; }
+        .form-footer a:hover { text-decoration: underline; }
+
+        /* --- Conteúdo Principal Renovado --- */
+        #app-content { position: relative; }
+        .header-background { 
+            background-color: var(--header-bg); /* Header com cor da marca */
+            background-image: url('img/bg.webp'); /* Fundo adicionado */
+            background-size: cover;
+            background-position:start;
+            height: 300px; width: 100%; position: absolute; top: 0; left: 0; z-index: -1; 
+        }
+        #header-top-bar { color: white; }
+        #logout-button { 
+            background-color: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.3); 
+            transition: background-color 0.2s; 
+        }
+        #logout-button:hover { background-color: rgba(255, 255, 255, 0.2); }
+        .search-bar { position: relative; max-width: 600px; margin: 25px auto 0 auto; }
+        .search-bar .bi-search { 
+            position: absolute; left: 20px; top: 50%; 
+            transform: translateY(-50%); 
+            color: var(--light-text-color); font-size: 1.2em; 
+        }
+        .search-bar input { 
+            width: 100%; padding: 18px 20px 18px 55px; border-radius: 50px; 
+            border: none; font-size: 1em; box-sizing: border-box; 
+            color: var(--text-color); box-shadow: var(--shadow-lg);
+        }
+        #back-button {
+            background-color: var(--card-background);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+        #back-button:hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        
+        /* --- Cards e Modals --- */
+        .item-card { 
+            background-color: var(--card-background); 
+            border: 1px solid var(--border-color); 
+            box-shadow: var(--shadow); 
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .item-card-clickable:hover { 
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-lg); 
+            cursor: pointer; 
+        }
+        .item-icon { color: var(--primary-color); }
+        .action-btn { 
+            background-color: var(--primary-color); 
+            color: white; 
+            font-weight: 500;
+        }
+        .action-btn:hover { background-color: var(--primary-hover-color); }
+        .options-button { color: #9ca3af; }
+        .options-button:hover { background-color: #f1f5f9; color: #1e293b; }
+
+        /* --- Estilos do Conteúdo do Modal --- */
+        #modal-content.prose { color: var(--text-color); }
+        #modal-content.prose h1, #modal-content.prose h2, #modal-content.prose h3, #modal-content.prose h4, #modal-content.prose p, #modal-content.prose li, #modal-content.prose strong { color: inherit; }
+        #modal-content.prose a { color: var(--primary-color); }
+        #modal-content.prose a:hover { color: var(--primary-hover-color); }
+
+        /* --- Estilos de Visualização (Grid vs. Lista) --- */
+        .view-btn { color: var(--light-text-color); }
+        .view-btn.active { background-color: var(--primary-color); color: white; }
+
+        #items-container.list-view { display: flex; flex-direction: column; gap: 0.5rem; }
+        #items-container.list-view .item-card:hover { transform: none; background-color: #f8fafc; }
+        #items-container.list-view .action-buttons-container .action-btn span { display: none; }
+        #items-container.list-view .action-buttons-container .action-btn { padding: 0.5rem; }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Tela de Login -->
+    <div id="login-page">
+        <div class="login-container">
+            <div class="login-logo"><img src="img/organnact-logo-laranja.png" alt="Logo da Empresa" onerror="this.onerror=null;this.src='https://placehold.co/150x45/fbae3d/ffffff?text=Organnact';"></div>
+            <h1>Guia de Biblioteca</h1>
+            <form id="login-form">
+                <div class="input-group"><label for="email">E-mail</label><input type="email" id="email" required></div>
+                <div class="input-group"><label for="password">Senha</label><input type="password" id="password" required></div>
+                <button type="submit" id="login-button">Entrar</button>
+                <p id="login-message"></p>
+                <div class="form-footer"><a id="forgot-password-link">Esqueci minha senha</a></div>
+            </form>
+            <form id="reset-form" class="hidden">
+                <div class="input-group"><label for="reset-email">Email para recuperação</label><input type="email" id="reset-email" required></div>
+                <button type="submit" id="reset-button">Enviar email de recuperação</button>
+                <p id="reset-message"></p>
+                <div class="form-footer"><a id="back-to-login-link">Voltar ao login</a></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Conteúdo Principal do Guia -->
+    <div id="app-content" class="hidden">
+        <div class="header-background"></div>
+        <div id="header-top-bar" class="p-4 text-right"><span id="user-email" class="mr-4 text-sm align-middle"></span><button id="logout-button" class="font-semibold py-2 px-4 rounded-md text-sm">Sair <i class="bi bi-box-arrow-right ml-1"></i></button></div>
+        <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+            <header class="text-center mb-10 text-white">
+                <img src="img/organnact-logo-laranja.png" alt="Logo da Empresa" class="mx-auto h-12 mb-4" onerror="this.onerror=null;this.src='https://placehold.co/180x48/144371/ffffff?text=Organnact';">
+                <h1 class="text-3xl sm:text-4xl font-bold">Guia de Biblioteca</h1>
+                <p class="mt-2 text-lg opacity-90">Seu portal central para todos os materiais da empresa.</p>
+                <div class="search-bar"><i class="bi bi-search"></i><input type="text" id="search-input" placeholder="Pesquisar por um documento..."></div>
+            </header>
+
+            <main id="content-browser">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-y-4">
+                    <div id="breadcrumbs" class="text-lg font-medium text-gray-600 truncate"></div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-1">
+                            <button id="card-view-btn" class="view-btn p-2 rounded-md" title="Visualizar em cards"><i class="bi bi-grid-3x3-gap-fill text-xl"></i></button>
+                            <button id="list-view-btn" class="view-btn p-2 rounded-md" title="Visualizar em lista"><i class="bi bi-list text-xl"></i></button>
+                        </div>
+                        <button id="back-button" class="hidden font-semibold py-2 px-4 rounded-lg flex-shrink-0 flex items-center gap-2"><i class="bi bi-arrow-left"></i> Voltar</button>
+                    </div>
+                </div>
+                <div id="items-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="content-modal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-50 flex items-center justify-center p-4">
+        <div id="content-modal-box" class="bg-white rounded-xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col transform scale-95">
+            <header class="flex items-center justify-between p-4 border-b border-slate-200"><h2 id="modal-title" class="text-2xl font-bold text-gray-800"></h2><button id="modal-close-btn" class="text-gray-500 hover:text-gray-800"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></header>
+            <div id="modal-content" class="p-6 overflow-y-auto prose max-w-none"></div>
+        </div>
+    </div>
+    <div id="lightbox-modal" class="hidden fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4">
+        <button id="lightbox-close-btn" class="absolute top-4 right-4 text-white text-4xl">&times;</button>
+        <img id="lightbox-image" src="" class="max-w-full max-h-full rounded-lg">
+    </div>
+
+    <script type="module">
+        import { initializeApp as initializeFirebaseApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // --- Configuração ---
+        // --- Firebase Auth para login e senha ---
+        const firebaseConfig = { apiKey: "", authDomain: "SEU-PROJETO.firebaseapp.com", projectId: "nome-do-projeto-no-firebase", storageBucket: "nome-do-projeto.firebasestorage.app", messagingSenderId: "numero id", appId: "appId do fire" };
+        // --- Permitir usuários vindo de algum site (eles não vão precisar de login) ---
+        const DOMINIO_PERMITIDO = 'force.com';
+        // --- Apps Script para fazer API de consultar Google Drive ---
+        const WEB_APP_URL = 'ADICIONE AQUI O URL APP DO GOOGLE APPS SCRIPTS';
+
+        // --- Inicialização ---
+        const app = initializeFirebaseApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- Elementos do DOM ---
+        const loginPage = document.getElementById('login-page');
+        const appContent = document.getElementById('app-content');
+        const loginForm = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const loginMessage = document.getElementById('login-message');
+        const logoutButton = document.getElementById('logout-button');
+        const userEmailSpan = document.getElementById('user-email');
+        const headerTopBar = document.getElementById('header-top-bar');
+        const resetForm = document.getElementById('reset-form');
+        const resetEmailInput = document.getElementById('reset-email');
+        const resetMessage = document.getElementById('reset-message');
+        const forgotPasswordLink = document.getElementById('forgot-password-link');
+        const backToLoginLink = document.getElementById('back-to-login-link');
+        const itemsContainer = document.getElementById('items-container');
+        const modal = document.getElementById('content-modal');
+        const modalBox = document.getElementById('content-modal-box');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+        const searchInput = document.getElementById('search-input');
+        const backButton = document.getElementById('back-button');
+        const breadcrumbs = document.getElementById('breadcrumbs');
+        const lightboxModal = document.getElementById('lightbox-modal');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const lightboxCloseBtn = document.getElementById('lightbox-close-btn');
+        const cardViewBtn = document.getElementById('card-view-btn');
+        const listViewBtn = document.getElementById('list-view-btn');
+
+        // --- Variáveis de Estado ---
+        let navigationStack = [];
+        let itemCache = {};
+        let isSearching = false;
+        let currentView = localStorage.getItem('viewMode') || 'grid';
+        let currentData = {};
+
+        // --- Lógica de Visualização ---
+        function setView(view) {
+            currentView = view;
+            localStorage.setItem('viewMode', view);
+            updateView();
+            renderItems(currentData);
+        }
+
+        function updateView() {
+            if (currentView === 'list') {
+                itemsContainer.classList.add('list-view');
+                itemsContainer.classList.remove('grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'xl:grid-cols-4', 'gap-6');
+                listViewBtn.classList.add('active');
+                cardViewBtn.classList.remove('active');
+            } else {
+                itemsContainer.classList.remove('list-view');
+                itemsContainer.classList.add('grid', 'grid-cols-1', 'sm:grid-cols-2', 'lg:grid-cols-3', 'xl:grid-cols-4', 'gap-6');
+                cardViewBtn.classList.add('active');
+                listViewBtn.classList.remove('active');
+            }
+        }
+
+        // --- Lógica de Busca ---
+        async function performSearch(query) {
+            const trimmedQuery = query.trim();
+            if (!trimmedQuery) {
+                isSearching = false;
+                const lastFolder = navigationStack[navigationStack.length - 1];
+                navigateTo(lastFolder.id, lastFolder.name);
+                return;
+            }
+
+            isSearching = true;
+            itemsContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Buscando por "${trimmedQuery}"...</p>`;
+            breadcrumbs.innerHTML = `Resultados da busca para: <span class="font-bold text-gray-800">"${trimmedQuery}"</span>`;
+            backButton.classList.add('hidden');
+
+            const url = `${WEB_APP_URL}?query=${encodeURIComponent(trimmedQuery)}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Erro na rede`);
+                const data = await response.json();
+                if (data.error) throw new Error(data.message);
+                currentData = data;
+                renderItems(data);
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+                itemsContainer.innerHTML = `<p class="col-span-full text-center text-red-600">Falha ao realizar a busca.</p>`;
+            }
+        }
+
+        // --- Lógica de Navegação e Renderização ---
+        async function fetchFolderContents(folderId) {
+            const cacheId = folderId || 'root';
+            if (itemCache[cacheId]) return itemCache[cacheId];
+
+            itemsContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Carregando...</p>`;
+            const url = folderId ? `${WEB_APP_URL}?folderId=${folderId}` : WEB_APP_URL;
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Erro na rede`);
+                const data = await response.json();
+                if (data.error) throw new Error(data.message);
+                itemCache[cacheId] = data;
+                return data;
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+                itemsContainer.innerHTML = `<p class="col-span-full text-center text-red-600">Falha ao carregar o conteúdo.</p>`;
+                return null;
+            }
+        }
+
+        function getIconHtml(iconIdentifier) {
+            switch(iconIdentifier) {
+                case 'equino':
+                    return `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" fill="none" viewBox="0 0 32 32" class="w-full h-full"><path fill="currentColor" d="M13.22 4.79997C13.22 4.83997 13.21 4.87997 13.2 4.91997L13.4587 4.91997C13.5188 4.91997 13.5588 4.86997 13.5588 4.80997V4.79997C13.5588 4.54997 13.3387 4.40997 13.1388 4.40997C13.0509 4.40997 12.9631 4.43447 12.8906 4.48127C12.9125 4.47391 12.9357 4.46997 12.96 4.46997C13.1 4.46997 13.22 4.61997 13.22 4.79997Z"></path><path fill="currentColor" d="M12.8288 4.91997 13.0688 4.91999C13.0888 4.87999 13.0988 4.83998 13.0988 4.79999 13.0988 4.68999 13.0288 4.60999 12.9488 4.60999 12.929 4.60999 12.9099 4.61549 12.8922 4.6253 12.9024 4.63628 12.9088 4.65223 12.9088 4.66999 12.9088 4.70312 12.8865 4.72999 12.8588 4.72999 12.8429 4.72999 12.8287 4.72104 12.8196 4.7071 12.8065 4.73506 12.7988 4.76698 12.7988 4.79999 12.7988 4.83998 12.8088 4.87998 12.8288 4.91997ZM13.3274 5.7043C13.3747 5.72008 13.4003 5.77121 13.3845 5.81853 13.2987 6.07584 13.0276 6.21141 12.7703 6.12564 12.723 6.10987 12.6974 6.05873 12.7132 6.01142 12.7289 5.9641 12.7801 5.93853 12.8274 5.9543 12.9901 6.00853 13.1589 5.9241 13.2132 5.76142 13.2289 5.7141 13.2801 5.68853 13.3274 5.7043Z"></path><path fill="currentColor" d="M23.0309 10.679L21.6023 12H23.0788C23.1067 12 23.1345 12.0002 23.1623 12.0007C23.8137 12.0115 24.4341 12.1485 25 12.3883V9.49999C25 8.11999 26.1288 6.99999 27.5088 6.99999H28.6688C28.8788 6.99999 29 6.83999 29 6.64999V5.47999C29 5.20999 29.2488 5 29.5188 5C30.3588 5 31 5.66999 31 6.49999V8.49999C31 9.87999 29.9088 11 28.5288 11H27.3688C27.1688 11 27 11.16 27 11.36V13.9456C27.627 14.7714 27.9988 15.8017 27.9988 16.92V24.1C27.9988 24.68 27.7988 25.25 27.4388 25.7L24.1988 29.75C24.0688 29.91 23.8788 30 23.6788 30H22.4588C22.2688 30 22.1588 29.78 22.2788 29.63L24.5188 26.64C24.8288 26.22 24.9988 25.72 24.9988 25.2C24.9988 24.44 24.6388 23.73 24.0388 23.28L22.9528 22.4655L19.2588 26.15C19.0988 26.31 19 26.52 19 26.75V27.69C19 27.87 18.8588 28.01 18.6888 28.01H17.3188C17.1388 28.01 16.9988 27.86 16.9988 27.69V26.75C16.9988 25.98 17.2988 25.27 17.8388 24.74L18.7188 23.86C18.8988 23.68 18.9988 23.43 18.9988 23.18V21H12.3288C11.6288 21 10.9688 20.86 10.3588 20.59C10.2588 20.55 10.1488 20.57 10.0688 20.65L9.18882 21.53C9.05882 21.67 8.98882 21.84 8.99882 22.03C9.00882 22.2 9.08882 22.36 9.20882 22.49L10.4688 23.76C10.6288 23.91 10.8388 24 11.0588 24H11.5188C11.7888 24 11.9988 24.21 11.9988 24.48V25.52C11.9988 25.79 11.7888 26 11.5188 26H11.0588C10.3088 26 9.59882 25.71 9.05882 25.17L7.80882 23.91C7.30882 23.4 6.99882 22.72 6.99882 22C6.99882 21.29 7.27882 20.62 7.77882 20.11L8.41882 19.47C8.51882 19.37 8.51882 19.22 8.43882 19.12C8.1677 18.7836 7.94195 18.4069 7.76791 18H5.65878C5.28878 18 4.99878 18.3 4.99878 18.66V21.02C4.99878 21.24 5.08878 21.45 5.23878 21.61L5.62878 22C5.77878 22.15 5.77878 22.39 5.62878 22.54L4.75878 23.42C4.60878 23.57 4.36878 23.57 4.21878 23.42L3.82878 23.03C3.28878 22.49 2.99878 21.78 2.99878 21.02V18.66C2.99878 17.19 4.18878 16 5.65878 16H7.31079L6.55389 10.5175C7.01 11.1683 7.73808 11.55 8.53886 11.55H9.42333L9.42058 11.5425C9.33312 11.301 9.29579 11.0443 9.31088 10.788C9.31607 10.7111 9.32585 10.635 9.34007 10.56H8.99896V3.66202C9.40296 3.99063 9.72624 4.30978 9.96882 4.75L12.3265 9.00002H13.1379L13.5449 8.14802C13.0359 8.16975 12.539 7.98917 12.1628 7.64571C11.7865 7.30226 11.5615 6.82385 11.5369 6.31502C11.395 6.18486 11.2841 6.02465 11.2121 5.8461C11.1401 5.66754 11.109 5.47516 11.1209 5.28302C11.1337 5.0652 11.2026 4.85439 11.3209 4.67102C11.1168 4.49833 10.9669 4.27046 10.8891 4.01472C10.8112 3.75898 10.8088 3.48622 10.882 3.22913C10.9553 2.97204 11.1011 2.74152 11.302 2.5652C11.5029 2.38888 11.7505 2.27424 12.0149 2.23502C12.318 1.85026 12.7044 1.53923 13.145 1.32532C13.5857 1.11141 14.0691 1.00019 14.5589 1.00002C15.2808 0.997605 15.9826 1.23754 16.5519 1.6814C17.1212 2.12525 17.5251 2.74734 17.6989 3.44802C17.7733 3.74461 17.7359 4.05821 17.5939 4.32902C17.5943 4.55559 17.5647 4.78121 17.5059 5.00002H20.8999C21.7499 4.99003 22.5697 5.31536 23.1816 5.90553C23.7934 6.49569 24.1482 7.30316 24.1689 8.15302C24.1883 8.94706 23.9101 9.71968 23.3889 10.319C23.2827 10.4514 23.1627 10.5721 23.0309 10.679ZM12.2189 4.00002H12.4869C12.4827 4.0499 12.481 4.09997 12.4819 4.15002V4.53002C12.4829 4.64937 12.4519 4.76682 12.3919 4.87002C12.34 4.95973 12.2833 5.04652 12.2219 5.13002C12.1652 5.19031 12.13 5.26766 12.1219 5.35002C12.1216 5.3908 12.1295 5.43123 12.1449 5.46896C12.1604 5.50669 12.1832 5.54097 12.2121 5.56981C12.2409 5.59865 12.2752 5.62148 12.3129 5.63696C12.3507 5.65245 12.3911 5.66028 12.4319 5.66002C12.4619 5.66002 12.4819 5.69002 12.4919 5.72002C12.5119 6.56002 12.6719 7.15002 13.6719 7.15002C13.916 7.14695 14.1582 7.10786 14.3909 7.03402L14.7982 7.84275L15.4389 6.5C15.5889 6.18 15.9189 6 16.2489 6H16.4414C16.4685 5.9408 16.4795 5.87543 16.4732 5.81057C16.4668 5.74534 16.4432 5.683 16.4046 5.62999C16.3661 5.57698 16.3141 5.53522 16.254 5.50903C16.1939 5.48284 16.1279 5.47317 16.0629 5.48102C16.2791 5.30558 16.441 5.0722 16.5295 4.80818C16.617 4.5474 16.6294 4.26735 16.5653 4H14.8999V4.35154C15.1813 4.37305 15.4089 4.61376 15.4089 4.89998C15.4089 5.18619 15.1813 5.4269 14.8999 5.44841V6.75C14.8999 6.88807 14.788 7 14.6499 7C14.5118 7 14.3999 6.88807 14.3999 6.75V4H12.2151L12.2189 4.00002ZM12 10H11.2289L11.2256 10C10.9809 10.0009 10.7546 10.0979 10.5878 10.2565C10.4251 10.4131 10.3256 10.6244 10.3089 10.85C10.302 10.9702 10.3196 11.0906 10.3606 11.2038C10.4016 11.317 10.4651 11.4207 10.5474 11.5086C10.5608 11.5229 10.5746 11.5367 10.5888 11.55C10.5976 11.5583 10.6068 11.5664 10.6159 11.5744C10.6828 11.632 10.7581 11.6795 10.8393 11.7152C10.9489 11.7632 11.0671 11.7887 11.1867 11.79L11.1889 11.79H12.1364L12 11.78V10ZM19.5589 10V10.2L18.8699 10.73C18.6631 10.9378 18.4993 11.1843 18.3877 11.4554C18.3157 11.6303 18.2665 11.8134 18.2407 12C18.2266 12.1022 18.22 12.2058 18.22 12.31L18.2199 14.02C18.2183 14.3631 18.1503 14.7027 18.0199 15.02L17.7499 15.65C17.7332 15.6881 17.7264 15.7298 17.7299 15.7712C17.7334 15.8127 17.7472 15.8526 17.7701 15.8873C17.7929 15.9221 17.8241 15.9506 17.8607 15.9703C17.8973 15.9899 17.9383 16.0002 17.9799 16H19.7579C19.823 15.9984 19.8848 15.9713 19.9301 15.9246C19.9754 15.8778 20.0004 15.8151 19.9999 15.75V12.32L20 12.3145C20.0007 12.2582 20.0124 12.2042 20.0331 12.1534C20.0552 12.0971 20.0878 12.0449 20.1299 12L22.3799 9.92102C22.4696 9.85133 22.5502 9.77071 22.6199 9.68102C22.9871 9.26505 23.1835 8.7257 23.1699 8.17102C23.1496 7.58461 22.9008 7.02939 22.4766 6.62393C22.0525 6.21848 21.4866 5.99492 20.8999 6.00102H19.5689V10L19.5589 10ZM23.0788 13H20.9999V15.75C20.9991 16.0813 20.8671 16.3988 20.6329 16.633C20.3986 16.8673 20.0812 16.9992 19.7499 17H17.9799C17.7726 17.0004 17.5684 16.9491 17.3858 16.8509C17.2033 16.7526 17.048 16.6104 16.9341 16.4372C16.8202 16.264 16.7512 16.0651 16.7334 15.8585C16.7155 15.652 16.7494 15.4442 16.8319 15.254L17.0949 14.642C17.1764 14.444 17.2192 14.2322 17.2209 14.018V13H16.0288C15.4724 13 14.9301 12.8957 14.4261 12.7012C14.2862 12.7374 14.1433 12.7626 13.9988 12.7766V16.91C13.9988 17.51 14.4888 18 15.0888 18H22.8988C23.4988 18 24 17.51 24 16.91L23.9911 13.1064C23.6985 13.0368 23.393 13 23.0788 13ZM16.2389 11.203C16.101 11.4942 15.9141 11.7579 15.6875 11.983C15.8003 11.9943 15.9142 12 16.0288 12H17.2348C17.2669 11.655 17.3542 11.3166 17.4939 10.998H16.3389L16.2389 11.203Z"></path><path fill="currentColor" d="M8.00006 10.4987C7.68068 10.4025 7.52205 10.1959 7.33886 9.90001L4.45953 5.3375 4.77095 5H3.95866C3.80866 5 3.69866 4.87 3.71866 4.72 3.84866 3.75 4.68866 3 5.69866 3H6.42882V2.27C6.42882 2.06 6.65882 1.93 6.83882 2.04L8.00006 2.90806V10.4987ZM5.78882 6.25001C5.78882 6.53001 6.00882 6.75001 6.28882 6.75001 6.56882 6.75001 6.78882 6.53001 6.78882 6.25001V5.70001C6.78882 5.42001 6.56882 5.20001 6.28882 5.20001 6.00882 5.20001 5.78882 5.42001 5.78882 5.70001V6.25001ZM3.75324 6.10294 2.99897 6.92037C2.65897 7.28037 2.25878 7.70004 2.25878 7.70004 2.03878 7.95004 1.94878 8.30004 2.02878 8.64004 2.03489 8.66775 2.0419 8.69487 2.04976 8.72139 2.22022 9.34951 2.86819 9.64825 3.48882 9.4L5.36261 8.64268 3.75324 6.10294Z"></path></svg>`;
+                case 'pet':
+                    return `<svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 32 32" class="w-full h-full"><path fill="currentColor" d="M6.75 11.4824C6.75 11.8874 7.08 12.2324 7.5 12.2324C7.92 12.2324 8.25 11.8874 8.25 11.4824V10.6274C8.25 10.2074 7.92 9.87744 7.5 9.87744C7.08 9.87744 6.75 10.2074 6.75 10.6274V11.4824Z"></path><path fill="currentColor" d="M24.62 5.00005C21.79 4.94005 19.44 7.01005 19.05 9.72005C19.03 9.87005 19.15 10.0001 19.3 10.0001H19.56C20.32 10.0001 21.04 9.58005 21.39 8.90005C21.99 7.72005 23.24 6.93005 24.67 7.00005C26.45 7.08005 27.9 8.52005 28 10.3101C28.0538 11.3814 27.6266 12.3541 26.9164 13.0318C25.8824 11.6906 24.2145 10.8709 22.3827 11.013C22.3677 11.0142 22.3527 11.0157 22.3378 11.0175L15.5178 11.8575L15.5118 11.8582C15.2948 11.8863 15.1598 11.8571 15.0748 11.824C14.9868 11.7897 14.9042 11.7322 14.8211 11.6418C14.7609 11.5764 14.7078 11.5033 14.6591 11.4235L14.663 11.4078L15.3216 8.78586L15.3219 8.7846C15.6802 7.36901 14.6045 6 13.1526 6H9.02C6.79076 6 4.84106 7.52266 4.29986 9.68746L4.22172 10H2.76C1.78771 10 1 10.7877 1 11.76V12C1 13.2677 1.58698 14.3959 2.50448 15.1283C2.50151 15.1647 2.5 15.2015 2.5 15.2387V15.75C2.5 16.4361 3.06386 17 3.75 17C4.35065 17 4.85759 16.5679 4.97459 15.9999L5 16H6V17.19C6 18.9488 6.59863 20.642 7.68315 22C5.64622 22.0091 4 23.6658 4 25.71V26.38C4 27.2827 4.73816 28 5.63 28H7.38C8.05288 28 8.63217 27.5862 8.87637 27H9.17C11.1443 27 12.7599 25.5221 12.9755 23.6074L14 29.74C14.03 29.89 14.16 30 14.31 30H16.75C16.9 30 17.02 29.86 17 29.71L15.8752 23H18.84C19.0652 23 19.2887 22.9878 19.5093 22.9638L18 29.69C17.96 29.85 18.08 29.99 18.24 29.99H20.68C20.83 29.99 20.95 29.89 20.98 29.75L22.0033 25.3108C22.2904 25.5313 22.6169 25.7207 22.9893 25.8687L22.9909 25.8694L25.01 26.677V28.69C25.01 29.4123 25.5977 30 26.32 30H28.7C29.4223 30 30.01 29.4123 30.01 28.69V23.84L30.0098 23.8208C29.9937 22.9843 29.5766 22.1881 28.8691 21.7109L28 21.1315V16.22C28 15.7565 27.9399 15.3078 27.8274 14.8811C29.1892 13.8465 30.0541 12.1928 30 10.3401C29.92 7.43005 27.53 5.06005 24.62 5.00005ZM6.24014 10.1725C6.53052 9.01104 7.51073 8.16302 8.6737 8.02103L9.30289 11.384L9.31069 11.4148C9.6207 12.6369 10.7224 13.4999 11.986 13.4999C12.5129 13.4999 13.0131 13.3517 13.4392 13.0894C13.9672 13.6146 14.7369 13.9741 15.765 13.8422L15.7682 13.8418L22.5584 13.0054C24.416 12.8734 26 14.3475 26 16.22V21.5C26 21.9492 26.2316 22.3631 26.5929 22.5971L27.7509 23.3691L27.7525 23.3702C27.9023 23.472 28.0038 23.652 28.01 23.8519V28H27.01V26.21C27.01 25.6405 26.6531 25.1879 26.1946 24.9969L26.1814 24.9915L23.7314 24.0115L23.7291 24.0106C22.8333 23.6548 22.3312 22.7654 22 21.4029V21.3657C22 20.0665 21.1002 18.8438 19.8 18.8438H11V23.17C11 24.1877 10.1877 25 9.17 25H8C7.44772 25 7 25.4477 7 26H6V25.71C6 24.7599 6.76469 24 7.7 24H9C9.55228 24 10 23.5523 10 23V21.97C10 21.7021 9.89247 21.4453 9.70152 21.2573C8.6128 20.1856 8 18.7225 8 17.19V15.31C8 14.5877 7.41229 14 6.69 14H5C4.1437 14 3.41614 13.4668 3.12998 12.713C3.23957 12.7762 3.36605 12.8125 3.5 12.8125H4C4.41 12.8125 4.75 12.4725 4.75 12.0625C4.75 12.0217 4.74663 11.9815 4.74014 11.9423C5.41663 11.7738 5.97722 11.2482 6.15126 10.5281L6.24014 10.1725ZM20.5695 20.6174C20.0564 20.8621 19.4638 21 18.84 21H12V19.8438H19.8C20.1857 19.8438 20.5811 20.1017 20.8079 20.5386C20.7263 20.5546 20.6462 20.5808 20.5695 20.6174ZM10.7045 8H13.1526C13.3072 8 13.42 8.14816 13.383 8.2941L13.3824 8.29636L12.722 10.9253L12.7194 10.936C12.6421 11.2586 12.3467 11.4999 11.986 11.4999C11.6508 11.4999 11.3503 11.2742 11.2559 10.9474L10.7045 8Z"></path></svg>`;
+                case 'folder': return `<i class="bi bi-folder-fill"></i>`;
+                case 'image': return `<i class="bi bi-image-fill"></i>`;
+                case 'document': return `<i class="bi bi-file-earmark-text-fill"></i>`;
+                case 'pdf': return `<i class="bi bi-file-earmark-zip-fill"></i>`;
+                case 'sheet': return `<i class="bi bi-file-earmark-spreadsheet-fill"></i>`;
+                case 'slide': return `<i class="bi bi-file-earmark-play-fill"></i>`;
+                default: return `<i class="bi bi-file-earmark-fill"></i>`;
+            }
+        }
+
+        function renderItems(data) {
+            itemsContainer.innerHTML = '';
+            let itemsToRender = (data && Array.isArray(data.items)) ? [...data.items] : [];
+
+            if (itemsToRender.length === 0) {
+                itemsContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Nenhum item encontrado.</p>`;
+                return;
+            }
+
+            itemsToRender.forEach(item => {
+                const itemElement = document.createElement('div');
+                const isFolder = item.type === 'folder';
+                const isImage = item.fileType === 'image';
+                itemElement.dataset.id = item.id;
+                itemElement.dataset.type = item.type;
+
+                const menuItemClasses = "flex items-center gap-3 py-2 px-4 w-full text-left text-sm text-slate-700 hover:bg-slate-100 transition-colors";
+                let menuItems = `<a href="${item.driveLink}" target="_blank" rel="noopener noreferrer" class="${menuItemClasses}"><i class="bi bi-box-arrow-up-right w-4 text-center"></i> <span>Visualizar no Drive</span></a>`;
+                if (item.fileType === 'document') {
+                    menuItems += `<button class="read-content-btn ${menuItemClasses}"><i class="bi bi-book-fill w-4 text-center"></i> <span>Ler Conteúdo</span></button>`;
+                }
+                if (item.downloadLink) {
+                    menuItems += `<a href="${item.downloadLink}" download class="${menuItemClasses}"><i class="bi bi-download w-4 text-center"></i> <span>Baixar</span></a>`;
+                }
+                
+                if (currentView === 'grid') {
+                    itemElement.className = `item-card group p-4 rounded-xl flex flex-col text-center relative ${isFolder || isImage ? 'item-card-clickable' : ''}`;
+                    
+                    let cardVisualContent = isImage 
+                        ? `<div class="w-full h-24 mb-3 bg-slate-100 rounded-lg flex items-center justify-center overflow-hidden"><img src="${item.previewLink}" alt="Pré-visualização de ${item.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/200x96/e2e8f0/64748b?text=Imagem';"></div>`
+                        : `<div class="item-icon text-5xl mb-3 h-24 flex items-center justify-center">${getIconHtml(item.icon)}</div>`;
+
+                    let buttons = [];
+                    if (item.driveLink) {
+                        buttons.push(`<a href="${item.driveLink}" target="_blank" title="Visualizar ${item.title} no Drive" class="action-btn w-full py-2 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors text-xs"><i class="bi bi-box-arrow-up-right"></i><span>Visualizar no Drive</span></a>`);
+                    }
+                    if (item.downloadLink) {
+                        buttons.push(`<a href="${item.downloadLink}" download title="Baixar ${item.title}" class="action-btn w-full py-2 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors text-xs"><i class="bi bi-download"></i><span>Baixar</span></a>`);
+                    }
+                    let actionButtonsHTML = buttons.length > 0
+                        ? `<div class="mt-4 w-full flex items-center gap-2">${buttons.join('')}</div>`
+                        : '<div class="mt-4 h-[40px]"></div>';
+
+                    itemElement.innerHTML = `
+                        <div class="absolute top-2 right-2 z-10">
+                            <div class="relative">
+                                <button class="options-button rounded-full w-10 h-10 flex items-center justify-center"><i class="bi bi-three-dots-vertical text-xl"></i></button>
+                                <div class="options-menu hidden absolute bottom-full right-0 mb-1 bg-white rounded-lg shadow-lg border border-slate-200 z-20 w-52 overflow-hidden">${menuItems}</div>
+                            </div>
+                        </div>
+                        ${cardVisualContent}
+                        <h3 class="font-semibold text-gray-900 h-12 flex items-center justify-center text-base leading-tight px-2">${item.title}</h3>
+                        ${actionButtonsHTML}
+                    `;
+                } else { // List view
+                    itemElement.className = `item-card group p-3 rounded-xl flex items-center gap-4 ${isFolder || isImage ? 'item-card-clickable' : ''}`;
+
+                    let cardVisualContent = isImage 
+                        ? `<div class="w-14 h-14 flex-shrink-0 bg-slate-100 rounded-lg overflow-hidden"><img src="${item.previewLink}" alt="Pré-visualização de ${item.title}" class="w-full h-full object-cover"></div>`
+                        : `<div class="w-14 h-14 flex-shrink-0 flex items-center justify-center"><div class="item-icon text-4xl">${getIconHtml(item.icon)}</div></div>`;
+                    
+                    let listButtons = [];
+                    if (item.driveLink) {
+                        listButtons.push(`<a href="${item.driveLink}" target="_blank" title="Visualizar ${item.title} no Drive" class="action-btn p-2 rounded-lg flex items-center justify-center transition-colors"><i class="bi bi-box-arrow-up-right"></i></a>`);
+                    }
+                    if (item.downloadLink) {
+                        listButtons.push(`<a href="${item.downloadLink}" download title="Baixar ${item.title}" class="action-btn p-2 rounded-lg flex items-center justify-center transition-colors"><i class="bi bi-download"></i></a>`);
+                    }
+
+                    itemElement.innerHTML = `
+                        ${cardVisualContent}
+                        <h3 class="font-semibold text-gray-900 flex-grow truncate text-base text-left">${item.title}</h3>
+                        <div class="ml-auto flex-shrink-0 flex items-center gap-2">
+                            ${listButtons.join('')}
+                            <div class="relative">
+                                 <button class="options-button rounded-full w-10 h-10 flex items-center justify-center"><i class="bi bi-three-dots-vertical text-xl"></i></button>
+                                 <div class="options-menu hidden absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg border border-slate-200 z-20 w-52 overflow-hidden">${menuItems}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+                itemsContainer.appendChild(itemElement);
+            });
+        }
+
+        async function navigateTo(folderId, folderName) {
+            if (isSearching) {
+                isSearching = false;
+                searchInput.value = '';
+                delete itemCache['last_search_result'];
+            }
+            
+            if (navigationStack.length === 0 || navigationStack[navigationStack.length - 1].id !== folderId) {
+                if (!folderId || !navigationStack.some(level => level.id === folderId)) {
+                    navigationStack.push({ id: folderId, name: folderName });
+                }
+            }
+            
+            updateUIForNavigation();
+            const data = await fetchFolderContents(folderId);
+            if (data) {
+                currentData = data;
+                renderItems(data);
+            }
+        }
+
+        function updateUIForNavigation() {
+            backButton.classList.toggle('hidden', navigationStack.length <= 1 || isSearching);
+
+            breadcrumbs.innerHTML = '';
+            navigationStack.forEach((level, index) => {
+                const isLast = index === navigationStack.length - 1;
+                const crumb = document.createElement(isLast ? 'span' : 'a');
+                crumb.textContent = level.name;
+                crumb.className = isLast ? 'font-bold text-gray-800' : 'text-blue-600 hover:underline cursor-pointer';
+                if (!isLast) {
+                    crumb.onclick = (e) => {
+                        e.preventDefault();
+                        navigationStack = navigationStack.slice(0, index + 1);
+                        const prevLevel = navigationStack[navigationStack.length - 1];
+                        navigateTo(prevLevel.id, prevLevel.name);
+                    };
+                }
+                breadcrumbs.appendChild(crumb);
+                if (!isLast) breadcrumbs.append(' / ');
+            });
+        }
+
+        function openModal(item) { modalTitle.textContent = item.title; modalContent.innerHTML = item.content; modal.classList.remove('hidden'); setTimeout(() => { modal.classList.remove('opacity-0'); modalBox.classList.remove('scale-95'); }, 10); }
+        function closeModal() { modal.classList.add('opacity-0'); modalBox.classList.add('scale-95'); setTimeout(() => modal.classList.add('hidden'), 300); }
+        function openLightbox(item) { lightboxImage.src = item.previewLink; lightboxModal.classList.remove('hidden'); }
+        function closeLightbox() { lightboxModal.classList.add('hidden'); lightboxImage.src = ''; }
+
+        function findItemInCache(id) {
+            let item = null;
+            const searchData = itemCache['last_search_result'];
+            if (isSearching && searchData && searchData.items) {
+                item = searchData.items.find(i => i.id === id);
+            } else {
+                const currentFolderId = navigationStack.length > 0 ? navigationStack[navigationStack.length - 1].id || 'root' : 'root';
+                const currentFolderData = itemCache[currentFolderId];
+                if (currentFolderData && currentFolderData.items) {
+                    item = currentFolderData.items.find(i => i.id === id);
+                }
+            }
+            if (!item) {
+                for (const key in itemCache) {
+                    const found = itemCache[key]?.items?.find(i => i.id === id);
+                    if (found) { item = found; break; }
+                }
+            }
+            return item;
+        }
+
+        // --- Lógica de Autenticação e Inicialização ---
+        async function initializeApp() {
+            updateView();
+            navigateTo(null, 'Categorias Principais');
+
+            itemsContainer.addEventListener('click', (e) => {
+                const card = e.target.closest('.item-card');
+                if (!card) return;
+
+                const id = card.dataset.id;
+                const item = findItemInCache(id);
+                if (!item) return;
+
+                if (e.target.closest('.options-button, .action-btn, .read-content-btn')) {
+                    e.stopPropagation();
+                    if (e.target.closest('.options-button')) {
+                        const menu = card.querySelector('.options-menu');
+                        const isVisible = !menu.classList.contains('hidden');
+                        document.querySelectorAll('.options-menu').forEach(m => m.classList.add('hidden'));
+                        if (!isVisible) menu.classList.remove('hidden');
+                    }
+                    if (e.target.closest('.read-content-btn')) { openModal(item); }
+                    return;
+                }
+
+                if (item.type === 'folder') {
+                    if (isSearching) {
+                        isSearching = false;
+                        searchInput.value = '';
+                        navigationStack = [];
+                    }
+                    navigateTo(id, item.title);
+                } else if (item.fileType === 'image') {
+                    openLightbox(item);
+                }
+            });
+
+            backButton.addEventListener('click', async () => {
+                if (navigationStack.length > 1) {
+                    navigationStack.pop();
+                    const previousLevel = navigationStack[navigationStack.length - 1];
+                    navigateTo(previousLevel.id, previousLevel.name);
+                }
+            });
+
+            searchInput.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    performSearch(searchInput.value);
+                } else if (searchInput.value.trim() === '' && isSearching) {
+                    performSearch(''); 
+                }
+            });
+
+            cardViewBtn.addEventListener('click', () => setView('grid'));
+            listViewBtn.addEventListener('click', () => setView('list'));
+
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.options-button')) {
+                    document.querySelectorAll('.options-menu').forEach(m => m.classList.add('hidden'));
+                }
+            });
+
+            modalCloseBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            lightboxCloseBtn.addEventListener('click', closeLightbox);
+            lightboxModal.addEventListener('click', (e) => { if (e.target === lightboxModal) closeLightbox(); });
+        }
+
+        const referrer = document.referrer; const userAgent = navigator.userAgent;
+        const isFromSalesforceWebsite = referrer && referrer.includes(DOMINIO_PERMITIDO);
+        const isFromSalesforceMobile = userAgent && userAgent.includes('SalesforceMobile');
+
+        if (isFromSalesforceWebsite || isFromSalesforceMobile) {
+            loginPage.classList.add('hidden'); appContent.classList.remove('hidden'); headerTopBar.classList.add('hidden'); initializeApp();
+        } else {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    loginPage.style.opacity = '0'; setTimeout(() => loginPage.classList.add('hidden'), 300);
+                    appContent.classList.remove('hidden'); if(user.email) userEmailSpan.textContent = user.email; headerTopBar.classList.remove('hidden');
+                    initializeApp();
+                } else {
+                    loginPage.classList.remove('hidden'); loginPage.style.opacity = '1'; appContent.classList.add('hidden');
+                }
+            });
+            loginForm.addEventListener('submit', async (e) => { e.preventDefault(); loginMessage.textContent = ''; try { await signInWithEmailAndPassword(auth, emailInput.value, passwordInput.value); } catch (error) { loginMessage.textContent = 'Email ou senha incorretos.'; } });
+            if(logoutButton) { logoutButton.addEventListener('click', () => signOut(auth).catch((error) => console.error("Erro ao fazer logout:", error))); }
+            forgotPasswordLink.addEventListener('click', () => { loginForm.classList.add('hidden'); resetForm.classList.remove('hidden'); });
+            backToLoginLink.addEventListener('click', () => { resetForm.classList.add('hidden'); loginForm.classList.remove('hidden'); });
+            resetForm.addEventListener('submit', async (e) => { e.preventDefault(); resetMessage.textContent = ''; resetMessage.className = ''; try { await sendPasswordResetEmail(auth, resetEmailInput.value); resetMessage.textContent = 'Email de recuperação enviado! Verifique sua caixa de entrada.'; resetMessage.classList.add('success'); } catch (error) { resetMessage.classList.add('error'); resetMessage.textContent = error.code === 'auth/user-not-found' ? 'Este email não está registrado.' : 'Ocorreu um erro. Tente novamente.'; } });
+        }
+    </script>
+</body>
+</html>
